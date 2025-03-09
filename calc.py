@@ -28,16 +28,18 @@ class Calc(Compf):
     @staticmethod
     def _propagate(string):
         buffer = list()
+
         for char in string:
             if char.isdigit():
                 buffer.append(char)
                 continue
-
             if buffer:
                 yield "".join(buffer)
                 buffer.clear()
+
             yield char
 
+    # Укутывание генератора в список (как в одеялко)
     def propagate(self, string):
         return list(self._propagate("(" + string + ")"))
 
@@ -62,6 +64,13 @@ class Calc(Compf):
         self.r.push(
             {"+": add, "-": sub, "*": mul, "/": truediv, "^": pow}[c](first, second)
         )
+
+    # Исключение для правоассоциативности возведения в степень 
+    def is_precedes(self, a, b):
+        if a == "^" and b == "^":
+            return False
+        # Проверив исключение, вызываем функцию как обычно
+        return super().is_precedes(a, b)
 
 
 if __name__ == "__main__":
