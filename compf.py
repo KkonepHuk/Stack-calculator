@@ -36,7 +36,7 @@ class Compf:
         self.data.clear()
         # Последовательный вызов для всех символов
         # взятой в скобки формулы метода process_symbol
-        string = string.replace('**', '^')
+        string = string.replace("**", "^")
         for c in "(" + string + ")":
             self.process_symbol(c)
         return " ".join(self.data)
@@ -96,6 +96,6 @@ if __name__ == "__main__":
     c = Compf()
     while True:
         string = input("Арифметическая  формула: ")
-        result = c.compile(string).replace('^', '**')
+        result = c.compile(string).replace("^", "**")
         print(f"Результат её компиляции: {result}")
         print()
