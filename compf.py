@@ -96,5 +96,6 @@ if __name__ == "__main__":
     c = Compf()
     while True:
         str = input("Арифметическая  формула: ")
-        print(f"Результат её компиляции: {c.compile(str)}")
+        result = c.compile(str).replace('^', '**')
+        print(f"Результат её компиляции: {result}")
         print()
