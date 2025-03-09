@@ -23,8 +23,8 @@ class Calc(Compf):
         self.r = Stack()
 
     # Интерпретация арифметического выражения
-    def compile(self, str):
-        expression = expression_to_arabic(str)
+    def compile(self, string):
+        expression = expression_to_arabic(string)
         Compf.compile(self, expression)
         return self.r.top()
 
@@ -42,6 +42,6 @@ class Calc(Compf):
 if __name__ == "__main__":
     c = Calc()
     while True:
-        str = input("Арифметическое выражение: ")
-        print(f"Результат его вычисления: {c.compile(str)}")
+        string = input("Арифметическое выражение: ")
+        print(f"Результат его вычисления: {c.compile(string)}")
         print()

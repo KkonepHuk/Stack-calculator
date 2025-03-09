@@ -32,12 +32,12 @@ class Compf:
         # Создание списка с результатом компиляции
         self.data = []
 
-    def compile(self, str):
+    def compile(self, string):
         self.data.clear()
         # Последовательный вызов для всех символов
         # взятой в скобки формулы метода process_symbol
-        str = str.replace('**', '^')
-        for c in "(" + str + ")":
+        string = string.replace('**', '^')
+        for c in "(" + string + ")":
             self.process_symbol(c)
         return " ".join(self.data)
 
@@ -95,7 +95,7 @@ class Compf:
 if __name__ == "__main__":
     c = Compf()
     while True:
-        str = input("Арифметическая  формула: ")
-        result = c.compile(str).replace('^', '**')
+        string = input("Арифметическая  формула: ")
+        result = c.compile(string).replace('^', '**')
         print(f"Результат её компиляции: {result}")
         print()
