@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re
+
 from stack import Stack
 
 
@@ -24,7 +25,7 @@ class Compf:
     однобуквенные имена переменных [a-z]
     """
 
-    SYMBOLS = re.compile("[a-z]")
+    SYMBOLS = re.compile("^[a-z]$")
 
     def __init__(self):
         # Создание стека отложенных операций
@@ -32,12 +33,11 @@ class Compf:
         # Создание списка с результатом компиляции
         self.data = []
 
-    def compile(self, str):
+    def compile(self, string):
         self.data.clear()
         # Последовательный вызов для всех символов
         # взятой в скобки формулы метода process_symbol
-        str = str.replace('**', '^')
-        for c in "(" + str + ")":
+        for c in "(" + string + ")":
             self.process_symbol(c)
         return " ".join(self.data)
 
@@ -86,8 +86,6 @@ class Compf:
             return False
         elif b == ")":
             return True
-        elif a == "^" and b == "^":
-            return False
         else:
             return Compf.priority(a) >= Compf.priority(b)
 
@@ -95,7 +93,7 @@ class Compf:
 if __name__ == "__main__":
     c = Compf()
     while True:
-        str = input("Арифметическая  формула: ")
-        result = c.compile(str).replace('^', '**')
+        string = input("Арифметическая  формула: ")
+        result = c.compile(string)
         print(f"Результат её компиляции: {result}")
         print()
