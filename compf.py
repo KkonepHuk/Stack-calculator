@@ -36,6 +36,7 @@ class Compf:
         self.data.clear()
         # Последовательный вызов для всех символов
         # взятой в скобки формулы метода process_symbol
+        str = str.replace('**', '^')
         for c in "(" + str + ")":
             self.process_symbol(c)
         return " ".join(self.data)
@@ -47,7 +48,7 @@ class Compf:
         elif c == ")":
             self.process_suspended_operators(c)
             self.s.pop()
-        elif c in "+-*/":
+        elif c in "+-*/^":
             self.process_suspended_operators(c)
             self.s.push(c)
         else:
@@ -85,6 +86,8 @@ class Compf:
             return False
         elif b == ")":
             return True
+        elif a == "^" and b == "^":
+            return False
         else:
             return Compf.priority(a) >= Compf.priority(b)
 

@@ -36,7 +36,7 @@ class Calc(Compf):
     def process_oper(self, c):
         second, first = self.r.pop(), self.r.pop()
         self.r.push({"+": add, "-": sub, "*": mul,
-                     "/": truediv}[c](first, second))
+                     "/": truediv, "^": pow}[c](first, second))
 
 
 if __name__ == "__main__":
