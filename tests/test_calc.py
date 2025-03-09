@@ -1,7 +1,7 @@
 from pytest import approx, raises
 
 from calc import Calc
-from roman_to_arabic_module import expression_to_arabic
+from roman import expression_to_arabic
 
 
 class TestCalc:

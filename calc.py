@@ -4,7 +4,7 @@ from operator import add, sub, mul, truediv
 import re
 
 from compf import Compf
-from roman_to_arabic_module import expression_to_arabic
+from roman import expression_to_arabic
 from stack import Stack
 
 
