@@ -25,7 +25,7 @@ class Compf:
     однобуквенные имена переменных [a-z]
     """
 
-    SYMBOLS = re.compile("[a-z]")
+    SYMBOLS = re.compile("^[a-z]$")
 
     def __init__(self):
         # Создание стека отложенных операций
