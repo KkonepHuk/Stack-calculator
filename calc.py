@@ -4,6 +4,7 @@ import re
 from operator import add, sub, mul, truediv
 from stack import Stack
 from compf import Compf
+from roman_to_arabic_module import expression_to_arabic
 
 
 class Calc(Compf):
@@ -23,7 +24,8 @@ class Calc(Compf):
 
     # Интерпретация арифметического выражения
     def compile(self, str):
-        Compf.compile(self, str)
+        expression = expression_to_arabic(str)
+        Compf.compile(self, expression)
         return self.r.top()
 
     # Обработка цифры
