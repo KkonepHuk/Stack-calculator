@@ -1,5 +1,7 @@
 from pytest import approx, raises
+
 from calc import Calc
+from roman_to_arabic_module import expression_to_arabic
 
 
 class TestCalc:
@@ -86,3 +88,53 @@ class TestCalc:
     def test_expressions5(self):
         test = "(3-5-2*6/(1+1))/(2*5-1+4*(5*2/3))+(7+4+7/9)/(1+6/3)"
         assert self.c.compile(test) == approx(eval(test))
+
+    # Тесты на работу с римскими числами
+    def test_roman1(self):
+        assert self.c.compile("1+X") == 11
+
+    def test_roman2(self):
+        assert self.c.compile("XX+IV-V") == 19
+
+    def test_roman3(self):
+        assert self.c.compile("VII*(IV+II)/III+2") == approx(16.0)
+
+    def test_roman4(self):
+        assert self.c.compile("MMMCMXCIX+MMMCMXCIX+2") == 8000
+
+    def test_roman5(self):
+        assert self.c.compile("MXXIV/II/II/II/II") == approx(2**6)
+
+    # Тесты на работу с возведением в степень
+    def test_power1(self):
+        assert self.c.compile("2**10") == 1024
+
+    def test_power2(self):
+        assert self.c.compile("3**2**2") == 81 
+
+    def test_power3(self):
+        assert self.c.compile("2*2**2/2**2") == approx(64.0)
+
+    def test_power4(self):
+        assert self.c.compile("0**0") == 1
+
+    def test_power5(self):
+        assert self.c.compile("1+12**(3-1)") == 145
+
+    # Тесты на работу с римскими числами и возведением в степень
+    def test_vinegret1(self):
+        assert self.c.compile("2*III**II") == 36
+
+    def test_vinegret2(self):
+        assert self.c.compile("5**(CCCIII-CCC)+V") == 130
+
+    def test_vinegret3(self):
+        assert self.c.compile("V**(0-I)") == approx(0.2)
+
+    def test_vinegret4(self):
+        test = "(3-52-II*6/(I+1))/(2*V-1+4*(52*II/3))+(VII+4+7/9)/(I+6/3)"
+        assert self.c.compile(test) == approx(eval(expression_to_arabic(test))) 
+
+    def test_vinegret5(self):
+        with raises(ZeroDivisionError):
+            assert self.c.compile("XLII/(I+2-III)")
