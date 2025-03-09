@@ -65,7 +65,7 @@ class Calc(Compf):
             {"+": add, "-": sub, "*": mul, "/": truediv, "^": pow}[c](first, second)
         )
 
-    # Исключение для правоассоциативности возведения в степень 
+    # Исключение для правоассоциативности возведения в степень
     def is_precedes(self, a, b):
         if a == "^" and b == "^":
             return False

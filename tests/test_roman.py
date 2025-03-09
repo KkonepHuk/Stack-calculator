@@ -2,7 +2,6 @@ from roman import expression_to_arabic
 
 
 class TestRoman:
-    # Тесты на сложение
     def test_simple1(self):
         assert expression_to_arabic("10+20+30") == "10+20+30"
 
