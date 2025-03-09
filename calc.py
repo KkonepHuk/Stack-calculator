@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-from functools import reduce
 from operator import add, sub, mul, truediv
 import re
 
-from stack import Stack
 from compf import Compf
 from roman_to_arabic_module import expression_to_arabic
+from stack import Stack
 
 
 class Calc(Compf):
@@ -25,7 +24,7 @@ class Calc(Compf):
         self.r = Stack()
 
     # Приведение строчного выражения к списку
-    # Позволяет использовать не только цифры, но и числа 
+    # Позволяет использовать не только цифры, но и числа
     @staticmethod
     def _propagate(string):
         buffer = list()

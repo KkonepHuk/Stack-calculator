@@ -110,7 +110,7 @@ class TestCalc:
         assert self.c.compile("2**10") == 1024
 
     def test_power2(self):
-        assert self.c.compile("3**2**2") == 81 
+        assert self.c.compile("3**2**2") == 81
 
     def test_power3(self):
         assert self.c.compile("2*2**2/2**2") == approx(64.0)
@@ -133,7 +133,7 @@ class TestCalc:
 
     def test_vinegret4(self):
         test = "(3-52-II*6/(I+1))/(2*V-1+4*(52*II/3))+(VII+4+7/9)/(I+6/3)"
-        assert self.c.compile(test) == approx(eval(expression_to_arabic(test))) 
+        assert self.c.compile(test) == approx(eval(expression_to_arabic(test)))
 
     def test_vinegret5(self):
         with raises(ZeroDivisionError):
