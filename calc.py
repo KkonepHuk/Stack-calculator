@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-import re
+from functools import reduce
 from operator import add, sub, mul, truediv
+import re
+
 from stack import Stack
 from compf import Compf
 from roman_to_arabic_module import expression_to_arabic
@@ -14,7 +16,7 @@ class Calc(Compf):
     операндов допустимы только цифры [0-9]
     """
 
-    SYMBOLS = re.compile("[0-9]")
+    SYMBOLS = re.compile("[0-9]+")
 
     def __init__(self):
         # Инициализация (конструктор) класса Compf
@@ -22,10 +24,33 @@ class Calc(Compf):
         # Создание стека чисел для работы стекового калькулятора
         self.r = Stack()
 
+    # Приведение строчного выражения к списку
+    # Позволяет использовать не только цифры, но и числа 
+    @staticmethod
+    def _propagate(string):
+        buffer = list()
+        for char in string:
+            if char.isdigit():
+                buffer.append(char)
+                continue
+
+            if buffer:
+                yield "".join(buffer)
+                buffer.clear()
+            yield char
+
+    def propagate(self, string):
+        return list(self._propagate("(" + string + ")"))
+
     # Интерпретация арифметического выражения
     def compile(self, string):
+        self.data.clear()
+
         expression = expression_to_arabic(string)
-        Compf.compile(self, expression)
+        expression = expression.replace("**", "^")
+
+        for c in self.propagate(expression):
+            self.process_symbol(c)
         return self.r.top()
 
     # Обработка цифры
