@@ -41,7 +41,7 @@ class Calc(Compf):
 
     # Укутывание генератора в список (как в одеялко)
     def propagate(self, string):
-        return list(self._propagate("(" + string + ")"))
+        return list(self._propagate(f"({string})"))
 
     # Интерпретация арифметического выражения
     def compile(self, string):
@@ -52,7 +52,7 @@ class Calc(Compf):
 
         for c in self.propagate(expression):
             self.process_symbol(c)
-        return self.r.top()
+        return self.r.pop()
 
     # Обработка цифры
     def process_value(self, c):
