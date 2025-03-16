@@ -104,7 +104,7 @@ class Mischief(Compf):
 
         return " ".join(self.data)
 
-    # Сортировка групп
+    # Сортировка выражения с группами
     def _descend(self, tokens):
         # Так как сортировать группы нельзя, сперва уберем их
         # За ключи возьмем индексы групп, а за значения - сами группы
@@ -128,11 +128,12 @@ class Mischief(Compf):
             tokens.insert(index, self._descend(group))
         return tokens
 
-    # Распаковка групп
+    # Распаковка выражения с группами
     def _flatten(self, tokens):
         result = list()
 
         for token in tokens:
+            # Избавляемся от групп и оставляем только аргументы
             if not isinstance(token, Group):
                 result.append(token)
             else:
